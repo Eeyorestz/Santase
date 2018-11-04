@@ -9,23 +9,78 @@ namespace Santase
     public class Utils
     {
         CardPoolValues cards = new CardPoolValues();
-        public int cardCompared(string playerOneCard, string playerTwoCard)
-        {
-            int player = 0;
-            int sum = cards.cardPool[playerOneCard] + cards.cardPool[playerTwoCard];
-            var areMatching = colorComparer(playerOneCard, playerTwoCard);
-            if (areMatching)
-            {
-                var one = cards.cardPool[playerOneCard];
-                var two = cards.cardPool[playerTwoCard];
+        
+        public int handSum;
+        Player playerOne = new Player();
+        Player playerTwo = new Player();
+        private bool isFirstPlayerTurn = true;
 
+
+
+        public bool isTakingTheHand(bool isFirstPlayer)
+        {
+            return isFirstPlayer;
+        }
+
+        private void takingPoints()
+        {
+            if (isFirstPlayerTurn)
+            {
+                playerOne.Points = playerOne.Points + handSum;
+                Console.WriteLine("Player one points : {0} ",playerOne.Points);
             }
             else
             {
-                var one = cards.cardPool[playerOneCard];
-                var two = cards.cardPool[playerTwoCard];
+                playerTwo.Points = playerTwo.Points + handSum;
+                Console.WriteLine("Player two points : {0}",playerTwo.Points);
             }
-            return player;
+        }
+
+        public bool isOnTurn(string playerOneCard, string playerTwoCard, bool isFirstPlayer)
+        {
+            return isFirstPlayer;
+        }
+        public void cardCompare(string playerOneCard, string playerTwoCard, string powerColor)
+        {
+            handSum= sum(playerOneCard, playerTwoCard);
+            var areMatching = colorComparer(playerOneCard, playerTwoCard);
+            if (areMatching)
+            {
+                if (cards.cardPool[playerOneCard] > cards.cardPool[playerTwoCard])
+                {
+                    takingPoints();
+                }
+                else
+                {
+                    isFirstPlayerTurn = false;
+                    takingPoints();
+                }
+            }
+            else
+            {
+                if (isPowerColor(playerOneCard, powerColor))
+                {
+                    isFirstPlayerTurn = true;
+                    takingPoints();
+                }
+                else if (isPowerColor(playerTwoCard, powerColor))
+                {
+                    isFirstPlayerTurn = false;
+                    takingPoints();                   
+                }
+                else
+                {
+                    if (isFirstPlayerTurn)
+                    {
+                        takingPoints();
+                    }
+                    else
+                    {
+                        isFirstPlayerTurn = false;
+                        takingPoints();
+                    }
+                }
+            }          
         }
         private bool colorComparer(string playerOneCard, string playerTwoCard)
         {
@@ -45,6 +100,10 @@ namespace Santase
                 isPowerColor = true;
             }
             return isPowerColor;
+        }
+        private int sum(string playerOneCard, string playerTwoCard)
+        {
+            return  cards.cardPool[playerOneCard] + cards.cardPool[playerTwoCard];
         }
     }
 }

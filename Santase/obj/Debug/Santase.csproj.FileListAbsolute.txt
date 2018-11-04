@@ -5,3 +5,10 @@ C:\Users\Eeyorestz\source\repos\Santase\Santase\obj\Debug\Santase.csprojAssembly
 C:\Users\Eeyorestz\source\repos\Santase\Santase\obj\Debug\Santase.csproj.CoreCompileInputs.cache
 C:\Users\Eeyorestz\source\repos\Santase\Santase\obj\Debug\Santase.exe
 C:\Users\Eeyorestz\source\repos\Santase\Santase\obj\Debug\Santase.pdb
+C:\Users\PC\Source\Repos\Santase\Santase\obj\Debug\Santase.csprojAssemblyReference.cache
+C:\Users\PC\Source\Repos\Santase\Santase\obj\Debug\Santase.csproj.CoreCompileInputs.cache
+C:\Users\PC\Source\Repos\Santase\Santase\obj\Debug\Santase.exe
+C:\Users\PC\Source\Repos\Santase\Santase\obj\Debug\Santase.pdb
+C:\Users\PC\Source\Repos\Santase\Santase\bin\Debug\Santase.exe.config
+C:\Users\PC\Source\Repos\Santase\Santase\bin\Debug\Santase.exe
+C:\Users\PC\Source\Repos\Santase\Santase\bin\Debug\Santase.pdb

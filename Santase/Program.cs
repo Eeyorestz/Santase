@@ -8,21 +8,14 @@ namespace Santase
 {
     class Program
     {
-        enum CardValue
-        {
-            Nine = 0,
-            Joker = 2,
-            Queen = 3,
-            King = 4,
-            Ten = 10,
-            Ace = 11
-        }
+
+
         enum CardColor
         {
             Spade,
             Diamonds,
             Hearts,
-            Clubs    
+            Clubs
         }
 
         enum CardPool
@@ -55,28 +48,51 @@ namespace Santase
 
         static void Main(string[] args)
         {
+            string powerCard;
+            string powerColor="";
             Utils util = new Utils();
-            CardPoolValues cards = new CardPoolValues();
-            var allCards =cards.cardPool;
+            Player playerOne = new Player();
+            Player playerTwo = new Player();
 
-            List<String> firstPlayerHand = new List<string>();
-            List<String> secondPlayerHand = new List<string>();
-        
+            playerOne.Name = "FirstPlayer";
+            playerTwo.Name = "SecondPlayer";
+
+            playerOne.Points = 0;
+            playerTwo.Points = 0;
+
+
+            bool isFirstPLayer = playerOne.PlayerTurn = false;
+            CardPoolValues cards = new CardPoolValues();
+            var allCards = cards.cardPool;
+           
+           // List<String> firstPlayerHand = new List<string>();
+          
+          // List <String> secondPlayerHand = new List<string>();
+
             Randomizer pool = new Randomizer();
-            List<int> test =  pool.GenerateRandom(allCards.Count);
-                  
+            List<int> test = pool.GenerateRandom(allCards.Count);
+
+
             for (int i = 0; i < allCards.Count; i++)
             {
-                firstPlayerHand.Add(allCards.ElementAt(test[i]).Key);              
+                playerOne.Hand.Add(allCards.ElementAt(test[i]).Key);
                 test.RemoveAt(i);
-                 secondPlayerHand.Add(allCards.ElementAt(test[i]).Key);
+                playerTwo.Hand.Add(allCards.ElementAt(test[i]).Key);
                 test.RemoveAt(i);
-                if (secondPlayerHand.Count == 5)
+                if (playerTwo.Hand.Count == 5)
                 {
+                    powerCard = allCards.ElementAt(test[i]).Key;
+                    powerColor = powerCard.Substring(powerCard.IndexOf("Of") + 3);
+                    test.RemoveAt(i);
                     break;
                 }
             }
-            util.cardCompared(firstPlayerHand[0],secondPlayerHand[0]);
+            for (int i = 0; i < playerOne.Hand.Count; i++)
+            {
+                util.cardCompare(playerOne.Hand[i], playerTwo.Hand[i], powerColor);
+            }
+            //   util.cardCompare(playerOne.Hand[0], playerTwo.Hand[0], powerColor);
+            Console.ReadKey();
         }
     }
 }

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Randomizer.cs" />
     <Compile Include="CardPoolValues.cs" />
     <Compile Include="Program.cs" />

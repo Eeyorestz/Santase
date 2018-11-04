@@ -8,10 +8,11 @@ namespace Santase
 {
     public class Player
     {
-        private string cardColor;
+
         private bool isOnTurn;
         private int points = 0;
         private string playerName;
+        public int _playedCardIndex;
         private List<string> playerHand  = new List<string>();
 
         public bool PlayerTurn
@@ -23,6 +24,18 @@ namespace Santase
             set
             {
                 this.isOnTurn = value;
+            }
+        }
+
+        public int PlayedCard
+        {
+            get
+            {
+                return this._playedCardIndex;
+            }
+            set
+            {
+                this._playedCardIndex = value;
             }
         }
 
@@ -49,7 +62,6 @@ namespace Santase
                 this.playerName = value;
             }
         }
-
 
         public List<string> Hand
         {

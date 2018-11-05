@@ -39,9 +39,13 @@ namespace Santase
             player.Hand[3] = "Ace Of Clubs";
             player.Hand[4] = "Queen Of Hearts";
 
-            List<int> kingQueensList = kingQueenList(player.Hand);
+            var  kingQueensList = kingQueens(player.Hand);
             List<int> matchingkingQueens = new List<int>();
-            int temp = 0;
+            var duplicateKeys = kingQueensList.GroupBy(x => x.Value)
+                        .Where(group => group.Count() > 1)
+                        .Select(group => group.Key).ToList();
+
+
             for (int i = 0; i < kingQueensList.Count-1; i++)
             {
              //   if (player.Hand[kingQueensList[i]])
@@ -50,14 +54,28 @@ namespace Santase
 
             return areMatching;
         }
-        private List<int> kingQueenList(List<String> hand)
+        private Dictionary<int, string> kingQueens (List<string> hand)
         {
-            List<int> kingQueensList = new List<int>();
+            Dictionary<int, string > dictionary = new Dictionary<int, string>();
             for (int i = 0; i < hand.Count; i++)
             {
                 if (hand[i].StartsWith("Queen") || hand[i].StartsWith("King"))
                 {
-                    kingQueensList.Add(i);
+                    dictionary.Add( i, getColor(hand[i]));
+                }
+            }
+            return dictionary;
+        }
+        private List<string> kingQueenList(List<String> hand)
+        {
+            List<string> kingQueensList = new List<string>();
+            for (int i = 0; i < hand.Count; i++)
+            {
+                if (hand[i].StartsWith("Queen") || hand[i].StartsWith("King"))
+                {
+                    
+                    getColor(hand[i]); 
+                    kingQueensList.Add(hand[i]);
                 }
             }
             return kingQueensList;
@@ -110,9 +128,10 @@ namespace Santase
         private void getPowerColorCard()
         {
            cards.PowerCard = cardPool.ElementAt(cards.DeckCount[0]).Key;
-            cards.PowerColor = cards.PowerCard.Substring(cards.PowerCard.IndexOf("Of") + 3);
+            cards.PowerColor = getColor(cards.PowerCard);
             cards.DeckCount.RemoveAt(0);
         }
+        
         private List<int> GenerateRandom()
         {
             // generate count random values.
@@ -142,6 +161,11 @@ namespace Santase
                 result[i] = value;
             }
             return result;
+        }
+        private string getColor(string card)
+        {
+            card = card.Substring(card.IndexOf("Of") + 3);
+            return card;
         }
     }
 
